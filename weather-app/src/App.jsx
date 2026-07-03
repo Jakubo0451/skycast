@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { WEATHER_CODES } from "./utils/weatherCodes";
+import WeatherCard from "./components/WeatherCard";
 
 function App() {
   const [city, setCity] = useState("");
@@ -82,17 +82,8 @@ function App() {
           {loading && <p>Loading weather...</p>}
         </div>
         <div className="errorCard">{error && <p>{error}</p>}</div>
-        <div className="weather-card">
-          {weather && (
-            <>
-              <p>{weather.city}</p>
-              <p>{weather.country}</p>
-              <p>{weather.temperature}°C</p>
-              <p>{WEATHER_CODES[weather.weatherCode] || "Unknown weather"}</p>
-            </>
-          )}
-        </div>
       </div>
+      <WeatherCard weather={weather}/>
     </>
   );
 }
