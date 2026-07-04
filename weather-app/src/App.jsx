@@ -1,7 +1,11 @@
 import { useState } from "react";
 import "./App.css";
 import WeatherCard from "./components/WeatherCard";
-import fetchWeather from "./services/weatherService.js"
+import fetchWeather from "./services/weatherService.js";
+import SearchForm from "./components/SearchForm.jsx";
+import LoadingMessage from "./components/LoadingMessage.jsx";
+import ErrorMessage from "./components/ErrorMessage.jsx";
+import EmptyStateMessage from "./components/EmptyStateMessage.jsx";
 
 function App() {
   const [city, setCity] = useState("");
@@ -18,7 +22,7 @@ function App() {
     setLoading(true);
 
     try {
-      const weatherInfo = await fetchWeather(city)
+      const weatherInfo = await fetchWeather(city);
       setWeather(weatherInfo);
     } catch (error) {
       console.error("Error caught in block: ", error);
@@ -28,32 +32,21 @@ function App() {
       setLoading(false);
     }
   };
-  
+
   return (
     <>
       <div>
         <h1>Weather Dashboard</h1>
-        <form className="top_section" onSubmit={handleSearch}>
-          <input
-            type="text"
-            placeholder="Search a city name"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            required
-          />
-          <button type="submit">Search</button>
-        </form>
-        {!weather && !loading && !error && (
-          <>
-            <p>Type in a city to search for the weather</p>
-          </>
-        )}
-        <div className="loadingCard">
-          {loading && <p>Loading weather...</p>}
-        </div>
-        <div className="errorCard">{error && <p>{error}</p>}</div>
+        <SearchForm
+          city={city}
+          onCityChange={setCity}
+          onSearch={handleSearch}
+        />
+        {!weather && !loading && !error && <EmptyStateMessage />}
+        {loading && <LoadingMessage />}
+        {error && <ErrorMessage error={error} />}
       </div>
-      <WeatherCard weather={weather}/>
+      <WeatherCard weather={weather} />
     </>
   );
 }

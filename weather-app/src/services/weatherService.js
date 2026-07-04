@@ -27,8 +27,6 @@ async function fetchWeather(city) {
         city: name,
         country: country,
         temperature: weatherData.current.temperature_2m,
-        latitude: latitude,
-        longitude: longitude,
         weatherCode: weatherData.current.weather_code,
       };
       console.log("Weather data: ", weatherInfo);
