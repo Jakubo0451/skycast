@@ -1,0 +1,93 @@
+:root {
+  --bg: #0f172a;
+  --panel: #111827;
+  --panel-2: #1f2937;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --accent: #38bdf8;
+  --error: #f87171;
+  --border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0
+  ;
+}
+
+body {
+  font-family: Inter, system-ui, sans-serif;
+  background: radial-gradient(circle at top, #1e293b 0%, var(--bg) 55%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-shell {
+  width: min(100%, 720px);
+  display: grid;
+  gap: 1.5rem;
+}
+
+.top_section {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.top_section input {
+  flex: 1;
+  min-width: 220px;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+}
+
+.top_section button {
+  padding: 0.9rem 1.2rem;
+  border: 0;
+  border-radius: 14px;
+  background: var(--accent);
+  color: #0f172a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.weather-card,
+.loadingCard,
+.errorCard,
+.empty-state {
+  border: 1px solid var(--border);
+  background: rgba(17, 24, 39, 0.78);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 1.5rem;
+}
+
+.weather-card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.weather-temp {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 800;
+  line-height: 1;
+  margin: 0.5rem 0;
+}
+
+.weather-label {
+  color: var(--muted);
+  margin: 0;
+}
+
+.errorCard {
+  color: var(--error);
+}

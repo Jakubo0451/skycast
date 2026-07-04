@@ -35,7 +35,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="app-shell">
         <h1>Weather Dashboard</h1>
         <SearchForm
           city={city}
@@ -45,8 +45,8 @@ function App() {
         {!weather && !loading && !error && <EmptyStateMessage />}
         {loading && <LoadingMessage />}
         {error && <ErrorMessage error={error} />}
+        {weather && <WeatherCard weather={weather} />}
       </div>
-      <WeatherCard weather={weather} />
     </>
   );
 }
