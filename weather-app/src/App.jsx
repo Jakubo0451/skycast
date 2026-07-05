@@ -6,6 +6,7 @@ import SearchForm from "./components/SearchForm.jsx";
 import LoadingMessage from "./components/LoadingMessage.jsx";
 import ErrorMessage from "./components/ErrorMessage.jsx";
 import EmptyStateMessage from "./components/EmptyStateMessage.jsx";
+import ForecastList from "./components/ForecastList.jsx";
 
 function App() {
   const [city, setCity] = useState("");
@@ -47,6 +48,7 @@ function App() {
         {error && <ErrorMessage error={error} />}
         {weather && <WeatherCard weather={weather} />}
       </div>
+      {weather && <ForecastList daily={weather.daily}/>}
     </>
   );
 }
