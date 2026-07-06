@@ -7,12 +7,14 @@ import LoadingMessage from "./components/LoadingMessage.jsx";
 import ErrorMessage from "./components/ErrorMessage.jsx";
 import EmptyStateMessage from "./components/EmptyStateMessage.jsx";
 import ForecastList from "./components/ForecastList.jsx";
+import TodayDetails from "./components/TodayDetails.jsx";
 
 function App() {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [recentSearches, setRecentSearches] = useState("");
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -31,6 +33,7 @@ function App() {
       setWeather(null);
     } finally {
       setLoading(false);
+      setRecentSearches(city)
     }
   };
 
@@ -49,6 +52,7 @@ function App() {
         {weather && <WeatherCard weather={weather} />}
       </div>
       {weather && <ForecastList daily={weather.daily}/>}
+      {weather && <TodayDetails current={weather.current}/>}
     </>
   );
 }

@@ -14,7 +14,7 @@ async function fetchWeather(city) {
 
   const { latitude, longitude, name, country } = geoData.results[0];
   console.log(`Found: ${name}, ${country}, (${latitude}, ${longitude})`);
-const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&current=temperature_2m,weather_code&timezone=auto`;
+  const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&timezone=auto`;
   const weatherResponse = await fetch(weatherUrl);
 
   if (!weatherResponse.ok) {
@@ -36,6 +36,9 @@ const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&
     current: {
       temperature: weatherData.current.temperature_2m,
       weatherCode: weatherData.current.weather_code,
+      feelsLike: weatherData.current.apparent_temperature,
+      humidity: weatherData.current.relative_humidity_2m,
+      windSpeed: weatherData.current.wind_speed_10m
     },
     daily: dailyForecast,
   };
