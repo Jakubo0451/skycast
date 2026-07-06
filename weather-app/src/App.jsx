@@ -9,6 +9,7 @@ import EmptyStateMessage from "./components/EmptyStateMessage.jsx";
 import ForecastList from "./components/ForecastList.jsx";
 import TodayDetails from "./components/TodayDetails.jsx";
 import RecentSearches from "./components/RecentSearches.jsx";
+import ToggleButton from "./components/ToggleButton.jsx";
 
 function App() {
   const [city, setCity] = useState("");
@@ -16,12 +17,18 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [recentSearches, setRecentSearches] = useState([]);
+  const [unit, setUnit] = useState("celsius");
 
   const addRecentSearch = (newCity) => {
     setRecentSearches((prev) =>
       [newCity, ...prev.filter((city) => city !== newCity)].slice(0, 5),
     );
   };
+
+  const toggleUnit = () => {
+    setUnit((prev) => (prev === "celsius" ? "fahrenheit" : "celsius"));
+  };
+
   const handleRecentSearch = (selectedCity) => {
     setCity(selectedCity);
     searchWeather(selectedCity);
@@ -62,16 +69,17 @@ function App() {
           onSearch={handleSearch}
         />
         {!weather && !loading && !error && <EmptyStateMessage />}
+        <ToggleButton unit={unit} onToggle={toggleUnit} />
         <RecentSearches
           recentSearches={recentSearches}
           onSelectRecentSearch={handleRecentSearch}
         />
         {loading && <LoadingMessage />}
         {error && <ErrorMessage error={error} />}
-        {weather && <WeatherCard weather={weather} />}
+        {weather && <WeatherCard weather={weather} unit={unit}/>}
       </div>
-      {weather && <ForecastList daily={weather.daily} />}
-      {weather && <TodayDetails current={weather.current} />}
+      {weather && <ForecastList daily={weather.daily} unit={unit} />}
+      {weather && <TodayDetails current={weather.current} unit={unit} />}
     </>
   );
 }
