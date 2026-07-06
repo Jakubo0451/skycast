@@ -17,23 +17,27 @@ function App() {
   const [error, setError] = useState("");
   const [recentSearches, setRecentSearches] = useState([]);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (!city.trim()) return setError("Type something to search!");
+  const addRecentSearch = (newCity) => {
+    setRecentSearches((prev) =>
+      [newCity, ...prev.filter((city) => city !== newCity)].slice(0, 5),
+    );
+  };
+  const handleRecentSearch = (selectedCity) => {
+    setCity(selectedCity);
+    searchWeather(selectedCity);
+  };
+
+  const searchWeather = async (cityToSearch) => {
+    if (!cityToSearch.trim()) return setError("Type something to search!");
     setError("");
 
     setWeather(null);
     setLoading(true);
-    const addRecentSearch = (newCity) => {
-      setRecentSearches((prev) =>
-        [newCity, ...prev.filter((city) => city !== newCity)].slice(0, 5),
-      );
-    };
 
     try {
-      const weatherInfo = await fetchWeather(city);
+      const weatherInfo = await fetchWeather(cityToSearch);
       setWeather(weatherInfo);
-      addRecentSearch(city.trim());
+      addRecentSearch(cityToSearch.trim());
     } catch (error) {
       console.error("Error caught in block: ", error);
       setError(error.message || "Something went wrong");
@@ -41,6 +45,11 @@ function App() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    searchWeather(city);
   };
 
   return (
@@ -53,7 +62,10 @@ function App() {
           onSearch={handleSearch}
         />
         {!weather && !loading && !error && <EmptyStateMessage />}
-        <RecentSearches recentSearches={recentSearches} />
+        <RecentSearches
+          recentSearches={recentSearches}
+          onSelectRecentSearch={handleRecentSearch}
+        />
         {loading && <LoadingMessage />}
         {error && <ErrorMessage error={error} />}
         {weather && <WeatherCard weather={weather} />}

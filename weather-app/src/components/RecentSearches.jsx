@@ -1,11 +1,15 @@
 
-function RecentSearches({ recentSearches }) {
-  if (!recentSearches || recentSearches.length === 0) return null;
+function RecentSearches({ recentSearches, onSelectRecentSearch }) {
+  if (!Array.isArray(recentSearches) || recentSearches.length === 0) return null;
 
   return (
     <div>
       {recentSearches.map((city) => (
-        <button key={city}>{city}
+        <button
+          key={city}
+          type="button"
+          onClick={() => onSelectRecentSearch(city)}>
+          {city}
         </button>
       ))}
     </div>
