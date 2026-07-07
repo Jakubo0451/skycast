@@ -18,7 +18,12 @@ function App() {
   const [error, setError] = useState("");
   const [recentSearches, setRecentSearches] = useState([]);
   const [unit, setUnit] = useState("celsius");
+  const [selectedDay, setSelectedDay] = useState(null);
 
+const handleDayClick = (day) => {
+  console.log(day);
+  setSelectedDay(day);
+};
   const addRecentSearch = (newCity) => {
     setRecentSearches((prev) =>
       [newCity, ...prev.filter((city) => city !== newCity)].slice(0, 5),
@@ -49,6 +54,7 @@ function App() {
       console.error("Error caught in block: ", error);
       setError(error.message || "Something went wrong");
       setWeather(null);
+      setSelectedDay(null);
     } finally {
       setLoading(false);
     }
@@ -76,9 +82,15 @@ function App() {
         />
         {loading && <LoadingMessage />}
         {error && <ErrorMessage error={error} />}
-        {weather && <WeatherCard weather={weather} unit={unit}/>}
+        {weather && <WeatherCard weather={weather} unit={unit} selectedDay={selectedDay} />}
       </div>
-      {weather && <ForecastList daily={weather.daily} unit={unit} />}
+      {weather && (
+        <ForecastList
+          daily={weather.daily}
+          unit={unit}
+          onDayClick={handleDayClick}
+        />
+      )}
       {weather && <TodayDetails current={weather.current} unit={unit} />}
     </>
   );

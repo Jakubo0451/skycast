@@ -1,10 +1,10 @@
 import { WEATHER_CODES } from "../utils/weatherCodes"
 import { convertTemperature } from "../utils/temperature";
 
-function ForecastDayCard({ day, unit }) {
+function ForecastDayCard({ day, unit, onClick }) {
   
   return (
-    <div>
+    <div onClick={onClick}>
       <p>{new Date(day.date).toLocaleDateString("en-US", {weekday: "long"})}</p>
       <p>{convertTemperature(day.maxTemperature, unit)} / {convertTemperature(day.minTemperature, unit)}</p>
       <p>{WEATHER_CODES[day.weatherCode] || "Unknown weather"}</p>
