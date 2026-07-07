@@ -5,15 +5,17 @@ function ForecastList({ daily, unit, onDayClick }) {
     return null;
   }
   return (
-    <div>
-      {daily.map((day) => (
-        <ForecastDayCard
-          key={day.date}
-          day={day}
-          unit={unit}
-          onClick={() => onDayClick(day)}
-        />
-      ))}
+    <div className="forecast-panel">
+      <div className="forecast-list">
+        {daily.map((day) => (
+          <ForecastDayCard
+            key={day.date}
+            day={day}
+            unit={unit}
+            onClick={() => onDayClick(day)}
+          />
+        ))}
+      </div>
     </div>
   );
 }

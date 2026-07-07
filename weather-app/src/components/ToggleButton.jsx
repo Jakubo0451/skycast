@@ -2,7 +2,7 @@
 
 function ToggleButton({unit, onToggle}) {
   return (
-    <div>
+    <div className="toggle_button">
         <button onClick={onToggle}>Switch to {unit}</button>
     </div>
   )

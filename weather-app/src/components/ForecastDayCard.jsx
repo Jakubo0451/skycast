@@ -4,10 +4,10 @@ import { convertTemperature } from "../utils/temperature";
 function ForecastDayCard({ day, unit, onClick }) {
   
   return (
-    <div onClick={onClick}>
-      <p>{new Date(day.date).toLocaleDateString("en-US", {weekday: "long"})}</p>
-      <p>{convertTemperature(day.maxTemperature, unit)} / {convertTemperature(day.minTemperature, unit)}</p>
-      <p>{WEATHER_CODES[day.weatherCode] || "Unknown weather"}</p>
+    <div className="forecast-card" onClick={onClick}>
+      <p className="forecast-day">{new Date(day.date).toLocaleDateString("en-US", {weekday: "long"})}</p>
+      <p className="forecast-temps">{convertTemperature(day.maxTemperature, unit)} / {convertTemperature(day.minTemperature, unit)}</p>
+      <p className="forecast-condition">{WEATHER_CODES[day.weatherCode] || "Unknown weather"}</p>
     </div>
   )
 }
