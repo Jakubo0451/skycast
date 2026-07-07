@@ -6,6 +6,11 @@ function WeatherCard({ weather, unit, selectedDay }) {
     return (
       <div className="weather-card">
         <div className="weather_details">
+          <div className="location_container">
+            <p className="city_p">{weather.city} |</p>
+            <p className="country_p">{weather.country}</p>
+          </div>
+          <p className="date_p">{new Date(selectedDay.date).toLocaleDateString("en-US", {weekday: "long"})} |</p>
           <p className="max_temperature_p">
             {convertTemperature(selectedDay.maxTemperature, unit)} |
           </p>

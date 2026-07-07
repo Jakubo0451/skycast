@@ -45,6 +45,7 @@ const handleDayClick = (day) => {
 
     setWeather(null);
     setLoading(true);
+    setSelectedDay(null);
 
     try {
       const weatherInfo = await fetchWeather(cityToSearch);
@@ -54,7 +55,6 @@ const handleDayClick = (day) => {
       console.error("Error caught in block: ", error);
       setError(error.message || "Something went wrong");
       setWeather(null);
-      setSelectedDay(null);
     } finally {
       setLoading(false);
     }
