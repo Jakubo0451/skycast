@@ -1,16 +1,62 @@
-# React + Vite
+# SkyCast: Open-Meteo Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
 
-Currently, two official plugins are available:
+## Features
+* **Real-time Weather:** Current temperature, apparent temperature ("feels like"), wind speed, and humidity.
+* **7-Day Forecast:** Daily high/low temperatures
+* **Search Functionality:** Find weather data for any city worldwide using the integrated geocoding API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
+* **Frontend:** React.js
+* **Styling:** CSS
+* **API:** [Open-Meteo](https://open-meteo.com/) (Weather & Geocoding)
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Because Open-Meteo does not require an API key for non-commercial use, setting up this project locally is incredibly simple.
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Ensure you have [Node.js](https://nodejs.org/) (v16 or higher) and `npm` or `yarn` installed on your machine.
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/yourusername/skycast-weather.git](https://github.com/yourusername/skycast-weather.git)
+   cd skycast-weather
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. **Open the app:**
+   Navigate to `http://localhost:5173/` in your browser to view the application.
+
+
+## API Integration Details
+
+This project uses two primary endpoints from Open-Meteo:
+
+1.  **Weather Forecast API:** Fetches current conditions and daily/hourly forecasts based on latitude and longitude coordinates.
+    ```text
+    https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&timezone=auto
+    ```
+
+2.  **Geocoding API:** Converts city names entered by the user into coordinates for the forecast API.
+    ```text
+    https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city.trim())}&count=1&language=en
+    ```
