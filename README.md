@@ -7,6 +7,7 @@
 * **Real-time Weather:** Current temperature, apparent temperature ("feels like"), wind speed, and humidity.
 * **7-Day Forecast:** Daily high/low temperatures
 * **Search Functionality:** Find weather data for any city worldwide using the integrated geocoding API.
+* Live at jakubo0451.github.io/skycast/
 
 ## Tech Stack
 * **Frontend:** React.js
