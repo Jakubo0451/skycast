@@ -25,8 +25,8 @@ Ensure you have [Node.js](https://nodejs.org/) (v16 or higher) and `npm` or `yar
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/yourusername/skycast-weather.git](https://github.com/yourusername/skycast-weather.git)
-   cd skycast-weather
+   git clone [https://github.com/yourusername/skycast-weather.git](https://github.com/yourusername/skycast.git)
+   cd skycast-main
    ```
 
 2. **Install dependencies:**
