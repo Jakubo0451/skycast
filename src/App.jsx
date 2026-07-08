@@ -20,10 +20,10 @@ function App() {
   const [unit, setUnit] = useState("celsius");
   const [selectedDay, setSelectedDay] = useState(null);
 
-const handleDayClick = (day) => {
-  console.log(day);
-  setSelectedDay(day);
-};
+  const handleDayClick = (day) => {
+    console.log(day);
+    setSelectedDay(day);
+  };
   const addRecentSearch = (newCity) => {
     setRecentSearches((prev) =>
       [newCity, ...prev.filter((city) => city !== newCity)].slice(0, 5),
@@ -68,12 +68,22 @@ const handleDayClick = (day) => {
   return (
     <>
       <div className="app-shell">
-        <h1>Weather Dashboard</h1>
+        <h1>Skycast</h1>
         <SearchForm
           city={city}
           onCityChange={setCity}
           onSearch={handleSearch}
         />
+        <p>
+          Weather data by{" "}
+          <a
+            href="https://open-meteo.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open-Meteo.com
+          </a>
+        </p>
         {!weather && !loading && !error && <EmptyStateMessage />}
         <ToggleButton unit={unit} onToggle={toggleUnit} />
         <RecentSearches
@@ -82,7 +92,13 @@ const handleDayClick = (day) => {
         />
         {loading && <LoadingMessage />}
         {error && <ErrorMessage error={error} />}
-        {weather && <WeatherCard weather={weather} unit={unit} selectedDay={selectedDay} />}
+        {weather && (
+          <WeatherCard
+            weather={weather}
+            unit={unit}
+            selectedDay={selectedDay}
+          />
+        )}
       </div>
       {weather && (
         <ForecastList

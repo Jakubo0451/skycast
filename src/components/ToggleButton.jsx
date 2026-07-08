@@ -1,11 +1,11 @@
 
 
-function ToggleButton({unit, onToggle}) {
+function ToggleButton({ unit, onToggle }) {
   return (
-    <div className="toggle_button">
-        <button onClick={onToggle}>Switch to {unit}</button>
-    </div>
-  )
+    <button type="button" className="toggle_button" onClick={onToggle}>
+      {unit === "celsius" ? "Switch to Fahrenheit" : "Switch to Celsius"}
+    </button>
+  );
 }
 
-export default ToggleButton
+export default ToggleButton;
